@@ -5,67 +5,111 @@
  */
 package Janelas;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  *
  * @author Victor Turra
  */
 public class Cartao {
-    
-    private String nroCartao;
-    private String nomeTitular;
-    private int codSeguranca;
-    private int valMes;
-    private int valAno;
+
     private String tipoCartao;
 
-    public String getNroCartao() {
-        return nroCartao;
-    }
-
-    public void setNroCartao(String nroCartao) {
-        this.nroCartao = nroCartao;
-    }
-
-    public String getNomeTitular() {
-        return nomeTitular;
-    }
-
-    public void setNomeTitular(String nomeTitular) {
-        this.nomeTitular = nomeTitular;
-    }
-
-    public int getCodSeguranca() {
-        return codSeguranca;
-    }
-
-    public void setCodSeguranca(int codSeguranca) {
-        this.codSeguranca = codSeguranca;
-    }
-
-    public int getValMes() {
-        return valMes;
-    }
-
-    public void setValMes(int valMes) {
-        this.valMes = valMes;
-    }
-
-    public int getValAno() {
-        return valAno;
-    }
-
-    public void setValAno(int valAno) {
-        this.valAno = valAno;
-    }
+    public static final String PROP_TIPOCARTAO = "tipoCartao";
 
     public String getTipoCartao() {
         return tipoCartao;
     }
 
     public void setTipoCartao(String tipoCartao) {
+        String oldTipoCartao = this.tipoCartao;
         this.tipoCartao = tipoCartao;
+        propertyChangeSupport.firePropertyChange(PROP_TIPOCARTAO, oldTipoCartao, tipoCartao);
     }
+
     
+    private int valAno;
+
+    public static final String PROP_VALANO = "valAno";
+
+    public int getValAno() {
+        return valAno;
+    }
+
+    public void setValAno(int valAno) {
+        int oldValAno = this.valAno;
+        this.valAno = valAno;
+        propertyChangeSupport.firePropertyChange(PROP_VALANO, oldValAno, valAno);
+    }
+
+    private int valMes;
+
+    public static final String PROP_VALMES = "valMes";
+
+    public int getValMes() {
+        return valMes;
+    }
+
+    public void setValMes(int valMes) {
+        int oldValMes = this.valMes;
+        this.valMes = valMes;
+        propertyChangeSupport.firePropertyChange(PROP_VALMES, oldValMes, valMes);
+    }
+
     
+    private int codSeguranca;
+
+    public static final String PROP_CODSEGURANCA = "codSeguranca";
+
+    public int getCodSeguranca() {
+        return codSeguranca;
+    }
+
+    public void setCodSeguranca(int codSeguranca) {
+        int oldCodSeguranca = this.codSeguranca;
+        this.codSeguranca = codSeguranca;
+        propertyChangeSupport.firePropertyChange(PROP_CODSEGURANCA, oldCodSeguranca, codSeguranca);
+    }
+
     
+    private String nomeTitular;
+
+    public static final String PROP_NOMETITULAR = "nomeTitular";
+
+    public String getNomeTitular() {
+        return nomeTitular;
+    }
+
+    public void setNomeTitular(String nomeTitular) {
+        String oldNomeTitular = this.nomeTitular;
+        this.nomeTitular = nomeTitular;
+        propertyChangeSupport.firePropertyChange(PROP_NOMETITULAR, oldNomeTitular, nomeTitular);
+    }
+
+    
+    private String nroCartao;
+
+    public static final String PROP_NROCARTAO = "nroCartao";
+
+    public String getNroCartao() {
+        return nroCartao;
+    }
+
+    public void setNroCartao(String nroCartao) {
+        String oldNroCartao = this.nroCartao;
+        this.nroCartao = nroCartao;
+        propertyChangeSupport.firePropertyChange(PROP_NROCARTAO, oldNroCartao, nroCartao);
+    }
+
+    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+
 }
