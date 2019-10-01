@@ -2,15 +2,13 @@ package javaapplication5;
 
 public class Cliente extends Pessoa{
     
-    private int idEntrega_padrao;
-    private int idCartao_padrao;
+    private String Entrega_padrao;
     private int idCarrinho;
     private String PagamentoPadrao;
-
-    public Cliente(String nome, String cpf, int ep, int cp, int c, String pp) {
-        super(nome, cpf);
-        setIdEntrega_padrao(ep);
-        setIdCartao_padrao(cp);
+    
+    public Cliente(String nome, String cpf, String data, String ep, int c, String pp) {
+        super(nome, cpf, data);
+        setEntrega_padrao(ep);
         setIdCarrinho(c);
         setPagamentoPadrao(pp);
     }
@@ -23,20 +21,12 @@ public class Cliente extends Pessoa{
         this.PagamentoPadrao = PagamentoPadrao;
     }
 
-    public int getIdEntrega_padrao() {
-        return idEntrega_padrao;
+    public String getEntrega_padrao() {
+        return Entrega_padrao;
     }
 
-    public void setIdEntrega_padrao(int idEntrega_padrao) {
-        this.idEntrega_padrao = idEntrega_padrao;
-    }
-
-    public int getIdCartao_padrao() {
-        return idCartao_padrao;
-    }
-
-    public void setIdCartao_padrao(int idCartao_padrao) {
-        this.idCartao_padrao = idCartao_padrao;
+    public void setEntrega_padrao(String idEntrega_padrao) {
+        this.Entrega_padrao = idEntrega_padrao;
     }
 
     public int getIdCarrinho() {

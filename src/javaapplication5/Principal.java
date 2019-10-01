@@ -5,7 +5,7 @@ public class Principal {
 
     
     public static void main(String[] args) {
-      MenuPrincipal j = new MenuPrincipal();
+     MenuPrincipal j = new MenuPrincipal();
         j.setVisible(true);
     }
     
