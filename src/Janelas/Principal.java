@@ -5,8 +5,8 @@ public class Principal {
 
     
     public static void main(String[] args) {
-        MenuPrincipal j = new MenuPrincipal();
-        j.setSize(700, 700);
+        Tela_Login j = new Tela_Login();
+//        j.setSize(700, 700);
         j.setVisible(true);
     }
     
