@@ -28,4 +28,17 @@ public class AreaDeTrabalho extends  JDesktopPane{
     public void fecharCadastroCartao(){
         cadCartao = null;
     }
+    
+    private JInternalFrame cadProduto;
+    public void abrirCadastroProduto(){
+        if(cadProduto == null){
+            cadProduto = new CadProduto();
+            cadProduto.setVisible(true);
+            add(cadProduto);
+        }
+    }
+    public void fecharCadastroProduto(){
+        cadProduto = null;
+    }
+    
 }

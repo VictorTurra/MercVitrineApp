@@ -34,6 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         btnCadCliente = new javax.swing.JMenuItem();
         btnCadCartao = new javax.swing.JMenuItem();
+        btnCadProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -63,6 +64,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(btnCadCartao);
 
+        btnCadProduto.setText("Produto");
+        btnCadProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadProdutoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnCadProduto);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -81,6 +90,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnCadCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadCartaoActionPerformed
         areaDeTrabalho1.abrirCadastroCartao();
     }//GEN-LAST:event_btnCadCartaoActionPerformed
+
+    private void btnCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdutoActionPerformed
+        areaDeTrabalho1.abrirCadastroProduto();
+    }//GEN-LAST:event_btnCadProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,6 +135,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private Janelas.AreaDeTrabalho areaDeTrabalho1;
     private javax.swing.JMenuItem btnCadCartao;
     private javax.swing.JMenuItem btnCadCliente;
+    private javax.swing.JMenuItem btnCadProduto;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
