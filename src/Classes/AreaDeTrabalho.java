@@ -1,5 +1,8 @@
-package Janelas;
+package Classes;
 
+import Janelas.CadCartao;
+import Janelas.CadCliente;
+import Janelas.CadProduto;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 

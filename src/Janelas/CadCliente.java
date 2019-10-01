@@ -1,130 +1,227 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Janelas;
 
-/**
- *
- * @author Everton-PC
- */
-public class CadCliente extends javax.swing.JInternalFrame {
+import Classes.Cliente;
+import Classes.ConversorDateString;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Binding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.JTableBinding.ColumnBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
-    /**
-     * Creates new form CadCliente
-     */
-    public CadCliente() {
-        setSize(500, 500);
+
+public class CadCliente extends javax.swing.JInternalFrame {
+    private List<Cliente> lstClientes;
+    private void HabilitaCampos(boolean a){
+        txtEmail.setEnabled(a);
+        txtEnderecoPadrao.setEnabled(a);
+        txtPagPadrao.setEnabled(a);
+        txtNomeCliente.setEnabled(a);
+        txtCpf.setEnabled(a);
+        txtDataNasc.setEnabled(a);
+        txtTelefone.setEnabled(a);
+    }
+    private void SalvarBTM(boolean a, boolean b){
+        btnNovo.setVisible(a);
+        btnEditar.setVisible(a);
+        btnExcluir.setVisible(a);
+        btnSalvar.setVisible(b);
+        btnCancelar.setVisible(b);
+    }
+    private void LimpaCampos(){
+        txtEmail.setText("");
+        txtEnderecoPadrao.setText("");
+        txtPagPadrao.setText("");
+        txtNomeCliente.setText("");
+        txtCpf.setText("");
+        txtDataNasc.setText("");
+        txtTelefone.setText("");
+    }
+    public CadCliente(){
+      lstClientes = new ArrayList<>();
+        lstClientes = ObservableCollections.observableList(lstClientes);
         initComponents();
+        HabilitaCampos(false);
+        SalvarBTM(true, false);
+        
+        BindingGroup bg = new BindingGroup();
+        
+       JTableBinding tb = SwingBindings.createJTableBinding(
+       AutoBinding.UpdateStrategy.READ_WRITE,
+               lstClientes, tbCadCliente);
+       ColumnBinding cb = tb.addColumnBinding(BeanProperty.create("nome"));
+       cb.setColumnName("Nome");
+       cb = tb.addColumnBinding(BeanProperty.create("email"));
+       cb.setColumnName("Email");
+       cb = tb.addColumnBinding(BeanProperty.create("cpf"));
+       cb.setColumnName("CPF");
+       cb = tb.addColumnBinding(BeanProperty.create("data"));
+       cb.setColumnName("DataNascimento");
+       cb = tb.addColumnBinding(BeanProperty.create("tell"));
+       cb.setColumnName("Telefone");
+       cb = tb.addColumnBinding(BeanProperty.create("pag"));
+       cb.setColumnName("PagPadrao");
+       cb = tb.addColumnBinding(BeanProperty.create("eentrega"));
+       cb.setColumnName("EndEntreaga");
+       
+       bg.addBinding(tb);
+       
+       Binding b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.nome"),
+                txtNomeCliente, BeanProperty.create("text"));
+        bg.addBinding(b);
+            
+        b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.email"),
+                txtEmail, BeanProperty.create("text"));
+        bg.addBinding(b);
+       
+        b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.cpf"),
+                txtCpf, BeanProperty.create("text"));
+        bg.addBinding(b);
+        
+        ConversorDateString conv = new ConversorDateString();
+        b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.dataNasc"),
+                txtDataNasc, BeanProperty.create("text")
+            );
+        b.setConverter(conv);
+        bg.addBinding(b);
+        
+        b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.tell"),
+                txtTelefone, BeanProperty.create("text")
+            );
+        bg.addBinding(b);
+        
+         b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.entrega"),
+                txtEnderecoPadrao, BeanProperty.create("text"));
+        bg.addBinding(b);
+        
+         b = Bindings.createAutoBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE,
+                tbCadCliente, BeanProperty.create("selectedElement.pag"),
+                txtPagPadrao, BeanProperty.create("text"));
+        bg.addBinding(b);        
+       bg.bind();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         NomeCliente = new javax.swing.JLabel();
         txtNomeCliente = new javax.swing.JTextField();
-        CPF = new javax.swing.JLabel();
-        txtCPF = new javax.swing.JTextField();
         Email = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         Telefone = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
-        EnderecoPadrao = new javax.swing.JLabel();
-        txtEnderecoPadrao = new javax.swing.JTextField();
+        CPF = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        DataNasc = new javax.swing.JLabel();
+        txtDataNasc = new javax.swing.JTextField();
         PagPadrao = new javax.swing.JLabel();
         txtPagPadrao = new javax.swing.JTextField();
-        PagCad = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lstPagCad = new javax.swing.JList<>();
-        btnConsultaPg = new javax.swing.JButton();
-        EnderecoCad = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstEnderecoCad = new javax.swing.JList<>();
-        btnConsultaEnd = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lstClientCad = new javax.swing.JList<>();
+        EnderecoPadrao = new javax.swing.JLabel();
+        txtEnderecoPadrao = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbCadCliente = new javax.swing.JTable();
         btnNovo = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
-        setClosable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Cadastro de Cliente");
-        setVisible(true);
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosing(evt);
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
+        getContentPane().setLayout(null);
 
         NomeCliente.setText("Nome:");
+        getContentPane().add(NomeCliente);
+        NomeCliente.setBounds(10, 20, 40, 14);
 
         txtNomeCliente.setEnabled(false);
-
-        CPF.setText("CPF:");
-
-        txtCPF.setEnabled(false);
+        getContentPane().add(txtNomeCliente);
+        txtNomeCliente.setBounds(60, 20, 330, 20);
 
         Email.setText("E-mail:");
+        getContentPane().add(Email);
+        Email.setBounds(10, 50, 40, 14);
 
         txtEmail.setEnabled(false);
+        getContentPane().add(txtEmail);
+        txtEmail.setBounds(60, 50, 150, 20);
 
         Telefone.setText("Telefone:");
+        getContentPane().add(Telefone);
+        Telefone.setBounds(230, 50, 70, 14);
 
         txtTelefone.setEnabled(false);
+        getContentPane().add(txtTelefone);
+        txtTelefone.setBounds(290, 50, 100, 20);
 
-        EnderecoPadrao.setText("Endereço de entrega padrão:");
+        CPF.setText("CPF:");
+        getContentPane().add(CPF);
+        CPF.setBounds(10, 80, 40, 14);
 
-        txtEnderecoPadrao.setEnabled(false);
+        txtCpf.setEnabled(false);
+        getContentPane().add(txtCpf);
+        txtCpf.setBounds(60, 80, 80, 20);
 
-        PagPadrao.setText("Forma de Pagamento  Padrão:");
+        DataNasc.setText("Data Nascimento:");
+        getContentPane().add(DataNasc);
+        DataNasc.setBounds(180, 80, 110, 20);
+
+        txtDataNasc.setEnabled(false);
+        getContentPane().add(txtDataNasc);
+        txtDataNasc.setBounds(290, 80, 100, 20);
+
+        PagPadrao.setText("Forma de Pagamento Padrão:");
+        getContentPane().add(PagPadrao);
+        PagPadrao.setBounds(410, 10, 190, 14);
 
         txtPagPadrao.setEnabled(false);
+        getContentPane().add(txtPagPadrao);
+        txtPagPadrao.setBounds(410, 30, 200, 20);
 
-        PagCad.setText("Formas de Pagamento Cadastrados:");
+        EnderecoPadrao.setText("Endereço de entrega padrão:");
+        getContentPane().add(EnderecoPadrao);
+        EnderecoPadrao.setBounds(410, 60, 210, 14);
 
-        lstPagCad.setEnabled(false);
-        jScrollPane2.setViewportView(lstPagCad);
+        txtEnderecoPadrao.setEnabled(false);
+        getContentPane().add(txtEnderecoPadrao);
+        txtEnderecoPadrao.setBounds(410, 80, 200, 20);
 
-        btnConsultaPg.setText("Consultar");
-        btnConsultaPg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultaPgActionPerformed(evt);
+        tbCadCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        tbCadCliente.setCellSelectionEnabled(true);
+        jScrollPane4.setViewportView(tbCadCliente);
 
-        EnderecoCad.setText("Endereços de Entrega Cadastrados:");
-
-        lstEnderecoCad.setEnabled(false);
-        jScrollPane1.setViewportView(lstEnderecoCad);
-
-        btnConsultaEnd.setText("Consultar");
-        btnConsultaEnd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultaEndActionPerformed(evt);
-            }
-        });
-
-        jScrollPane3.setViewportView(lstClientCad);
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(10, 130, 600, 120);
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +229,35 @@ public class CadCliente extends javax.swing.JInternalFrame {
                 btnNovoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnNovo);
+        btnNovo.setBounds(20, 260, 81, 23);
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar);
+        btnEditar.setBounds(120, 260, 81, 23);
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalvar);
+        btnSalvar.setBounds(230, 260, 81, 23);
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelar);
+        btnCancelar.setBounds(330, 260, 90, 23);
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -139,149 +265,82 @@ public class CadCliente extends javax.swing.JInternalFrame {
                 btnExcluirActionPerformed(evt);
             }
         });
+        getContentPane().add(btnExcluir);
+        btnExcluir.setBounds(520, 260, 90, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(NomeCliente)
-                        .addGap(9, 9, 9)
-                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CPF)
-                        .addGap(17, 17, 17)
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(Telefone)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Email)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(EnderecoPadrao)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtEnderecoPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PagPadrao)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtPagPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PagCad, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(EnderecoCad, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(btnConsultaPg)
-                .addGap(131, 131, 131)
-                .addComponent(btnConsultaEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NomeCliente)
-                            .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CPF)
-                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Telefone)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Email)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EnderecoPadrao)
-                            .addComponent(txtEnderecoPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PagPadrao)
-                            .addComponent(txtPagPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PagCad)
-                            .addComponent(EnderecoCad))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConsultaPg)
-                    .addComponent(btnConsultaEnd)
-                    .addComponent(btnNovo)
-                    .addComponent(btnExcluir)))
-        );
-
-        pack();
+        setBounds(0, 0, 637, 326);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void btnConsultaPgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaPgActionPerformed
-        //Abrir Cadastro de Formas de pagamento
-    }//GEN-LAST:event_btnConsultaPgActionPerformed
-
-    private void btnConsultaEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaEndActionPerformed
-        //Abrir Cadastro de Endereços de entrega
-    }//GEN-LAST:event_btnConsultaEndActionPerformed
-
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // Habilitar Campos em branco e mudar novo -> salvar e Excluir -> Cancelar
+        SalvarBTM(false, true);
+        LimpaCampos();
+        HabilitaCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if(getDesktopPane() instanceof AreaDeTrabalho){
-            ((AreaDeTrabalho)getDesktopPane()).fecharCadastroCliente();
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+         Cliente c = new Cliente("","", "", "", 0, "");
+        if(tbCadCliente.getSelectedRows().length==0){
+            c.setNome(txtNomeCliente.getText());
+            c.setCpf(txtCpf.getText());
+            c.setEmail(txtEmail.getText());
+            c.setTelefone(txtTelefone.getText());
+            c.setEntrega_padrao(txtEnderecoPadrao.getText());
+            c.setPagamentoPadrao(txtPagPadrao.getText());
+            lstClientes.add(c);
+        }else{
+            lstClientes.add(c);
+            tbCadCliente.getSelectionModel().setSelectionInterval(
+                    lstClientes.size()-1,
+                    lstClientes.size()-1);
         }
-    }//GEN-LAST:event_formInternalFrameClosing
+        LimpaCampos();
+        HabilitaCampos(false);
+        SalvarBTM(true, false);
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        LimpaCampos();
+        HabilitaCampos(false);
+        SalvarBTM(true, false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        HabilitaCampos(true);
+        SalvarBTM(false, true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int v[] = tbCadCliente.getSelectedRows();
+        List<Cliente> c = new LinkedList<>();
+        
+        for(int i=0;i<v.length;i++) 
+        {
+            int idxTabela = v[i];
+            int idxList = tbCadCliente.convertRowIndexToModel(idxTabela);
+            c.add(lstClientes.get(idxList));
+        }
+        
+        lstClientes.removeAll(c);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CPF;
+    private javax.swing.JLabel DataNasc;
     private javax.swing.JLabel Email;
-    private javax.swing.JLabel EnderecoCad;
     private javax.swing.JLabel EnderecoPadrao;
     private javax.swing.JLabel NomeCliente;
-    private javax.swing.JLabel PagCad;
     private javax.swing.JLabel PagPadrao;
     private javax.swing.JLabel Telefone;
-    private javax.swing.JButton btnConsultaEnd;
-    private javax.swing.JButton btnConsultaPg;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> lstClientCad;
-    private javax.swing.JList<String> lstEnderecoCad;
-    private javax.swing.JList<String> lstPagCad;
-    private javax.swing.JTextField txtCPF;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable tbCadCliente;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEnderecoPadrao;
     private javax.swing.JTextField txtNomeCliente;

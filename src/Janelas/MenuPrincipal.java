@@ -29,7 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        areaDeTrabalho1 = new Janelas.AreaDeTrabalho();
+        areaDeTrabalho1 = new Classes.AreaDeTrabalho();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnCadCliente = new javax.swing.JMenuItem();
@@ -132,7 +132,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Janelas.AreaDeTrabalho areaDeTrabalho1;
+    private Classes.AreaDeTrabalho areaDeTrabalho1;
     private javax.swing.JMenuItem btnCadCartao;
     private javax.swing.JMenuItem btnCadCliente;
     private javax.swing.JMenuItem btnCadProduto;

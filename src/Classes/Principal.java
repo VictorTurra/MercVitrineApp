@@ -1,5 +1,7 @@
 
-package Janelas;
+package Classes;
+
+import Janelas.MenuPrincipal;
 
 public class Principal {
 

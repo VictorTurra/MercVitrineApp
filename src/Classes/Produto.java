@@ -1,5 +1,5 @@
 //@author SAMUEL DOS SANTOS SILVA 577588
-package Janelas;
+package Classes;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

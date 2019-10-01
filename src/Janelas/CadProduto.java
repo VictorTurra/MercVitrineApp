@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Janelas;
+import Classes.ConversorIntString;
+import Classes.Produto;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

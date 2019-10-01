@@ -5,6 +5,8 @@
  */
 package Janelas;
 
+import Classes.Cartao;
+import Classes.ConversorIntString;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
