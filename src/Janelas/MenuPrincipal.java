@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setBounds(0, 0, 772, 544);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadClienteMouseClicked
