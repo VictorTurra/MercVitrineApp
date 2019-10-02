@@ -38,7 +38,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setSize(new java.awt.Dimension(500, 500));
+        setSize(new java.awt.Dimension(700, 700));
         getContentPane().add(areaDeTrabalho1, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Cadastrar");
@@ -76,7 +76,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setBounds(0, 0, 772, 544);
+        setSize(new java.awt.Dimension(716, 539));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadClienteMouseClicked

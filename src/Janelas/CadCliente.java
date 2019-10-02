@@ -147,7 +147,11 @@ public class CadCliente extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setResizable(true);
         setTitle("Cadastro de Cliente");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(null);
 
         NomeCliente.setText("Nome:");
@@ -268,7 +272,7 @@ public class CadCliente extends javax.swing.JInternalFrame {
         getContentPane().add(btnExcluir);
         btnExcluir.setBounds(520, 260, 90, 23);
 
-        setBounds(0, 0, 637, 326);
+        setBounds(0, 0, 639, 329);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed

@@ -12,7 +12,6 @@ public class AreaDeTrabalho extends  JDesktopPane{
     public void abrirCadastroCliente(){
         if(cadCliente == null){
             cadCliente = new CadCliente();
-            cadCliente.setSize(500, 600);
             cadCliente.setVisible(true);
             add(cadCliente);
         }
