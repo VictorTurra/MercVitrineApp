@@ -7,14 +7,6 @@ public class Pessoa{
     private String email;
     private String data;
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public Pessoa(String nome, String cpf, String data) {
         this.nome = nome;
         this.cpf = cpf;
@@ -51,5 +43,13 @@ public class Pessoa{
 
     public void setEmail(String email) {
         this.email = email;
-    }    
+    }
+    
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 }

@@ -1,13 +1,13 @@
 
 package Classes;
 
-import Janelas.MenuPrincipal;
+import Janelas.Tela_Login;
 
 public class Principal {
 
     
     public static void main(String[] args) {
-        MenuPrincipal j = new MenuPrincipal();
+        Tela_Login j = new Tela_Login();
         j.setVisible(true);
     }
     

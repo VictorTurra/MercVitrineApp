@@ -18,6 +18,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -39,6 +40,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setSize(new java.awt.Dimension(700, 700));
+        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(areaDeTrabalho1, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Cadastrar");

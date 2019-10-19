@@ -2,13 +2,13 @@ package Classes;
 
 public class Cliente extends Pessoa{
     
-    private String Entrega_padrao;
+    private String Entrega;
     private int idCarrinho;
     private String PagamentoPadrao;
     
     public Cliente(String nome, String cpf, String data, String ep, int c, String pp) {
         super(nome, cpf, data);
-        setEntrega_padrao(ep);
+        setEntrega(ep);
         setIdCarrinho(c);
         setPagamentoPadrao(pp);
     }
@@ -21,12 +21,12 @@ public class Cliente extends Pessoa{
         this.PagamentoPadrao = PagamentoPadrao;
     }
 
-    public String getEntrega_padrao() {
-        return Entrega_padrao;
+    public String getEntrega() {
+        return Entrega;
     }
 
-    public void setEntrega_padrao(String idEntrega_padrao) {
-        this.Entrega_padrao = idEntrega_padrao;
+    public void setEntrega(String idEntrega_padrao) {
+        this.Entrega = idEntrega_padrao;
     }
 
     public int getIdCarrinho() {

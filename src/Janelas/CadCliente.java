@@ -63,11 +63,11 @@ public class CadCliente extends javax.swing.JInternalFrame {
        cb.setColumnName("CPF");
        cb = tb.addColumnBinding(BeanProperty.create("data"));
        cb.setColumnName("DataNascimento");
-       cb = tb.addColumnBinding(BeanProperty.create("tell"));
+       cb = tb.addColumnBinding(BeanProperty.create("telefone"));
        cb.setColumnName("Telefone");
-       cb = tb.addColumnBinding(BeanProperty.create("pag"));
+       cb = tb.addColumnBinding(BeanProperty.create("pagamentoPadrao"));
        cb.setColumnName("PagPadrao");
-       cb = tb.addColumnBinding(BeanProperty.create("eentrega"));
+       cb = tb.addColumnBinding(BeanProperty.create("entrega"));
        cb.setColumnName("EndEntreaga");
        
        bg.addBinding(tb);
@@ -252,7 +252,7 @@ public class CadCliente extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(230, 260, 81, 23);
+        btnSalvar.setBounds(260, 260, 81, 23);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +261,7 @@ public class CadCliente extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(330, 260, 90, 23);
+        btnCancelar.setBounds(360, 260, 90, 23);
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -287,8 +287,9 @@ public class CadCliente extends javax.swing.JInternalFrame {
             c.setNome(txtNomeCliente.getText());
             c.setCpf(txtCpf.getText());
             c.setEmail(txtEmail.getText());
+            c.setData(txtDataNasc.getText());
             c.setTelefone(txtTelefone.getText());
-            c.setEntrega_padrao(txtEnderecoPadrao.getText());
+            c.setEntrega(txtEnderecoPadrao.getText());
             c.setPagamentoPadrao(txtPagPadrao.getText());
             lstClientes.add(c);
         }else{
