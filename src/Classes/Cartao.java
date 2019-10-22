@@ -14,6 +14,20 @@ import java.beans.PropertyChangeSupport;
  */
 public class Cartao {
 
+    private Integer idCartao;
+
+    public static final String PROP_IDCARTAO = "idCartao";
+
+    public Integer getIdCartao() {
+        return idCartao;
+    }
+
+    public void setIdCartao(Integer idCartao) {
+        Integer oldIdCartao = this.idCartao;
+        this.idCartao = idCartao;
+        propertyChangeSupport.firePropertyChange(PROP_IDCARTAO, oldIdCartao, idCartao);
+    }
+
     private String tipoCartao;
 
     public static final String PROP_TIPOCARTAO = "tipoCartao";
