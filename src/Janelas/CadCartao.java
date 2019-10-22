@@ -7,6 +7,7 @@ package Janelas;
 
 import Classes.Cartao;
 import Classes.ConversorIntString;
+import DAO.CartaoDAO;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -123,6 +124,7 @@ public class CadCartao extends javax.swing.JInternalFrame {
         tbCartao = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnGravar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -203,6 +205,13 @@ public class CadCartao extends javax.swing.JInternalFrame {
             }
         });
 
+        btnGravar.setText("Gravar");
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,7 +245,9 @@ public class CadCartao extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAdicionar)))
+                        .addComponent(btnAdicionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGravar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -263,10 +274,11 @@ public class CadCartao extends javax.swing.JInternalFrame {
                             .addComponent(txtTpCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(tbPanelCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnGravar))
                 .addContainerGap())
         );
 
@@ -312,10 +324,23 @@ public class CadCartao extends javax.swing.JInternalFrame {
         lstCartao.removeAll(c);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        CartaoDAO cd = new CartaoDAO();
+        
+        for(Cartao c : lstCartao){
+            if(c.getIdCartao()==null)
+                cd.inserir(c);
+            else{
+                //cd.alterar(c);
+            }
+        }
+    }//GEN-LAST:event_btnGravarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnGravar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

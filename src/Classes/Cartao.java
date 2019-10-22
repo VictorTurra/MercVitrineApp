@@ -14,6 +14,20 @@ import java.beans.PropertyChangeSupport;
  */
 public class Cartao {
 
+    private Integer idCliente;
+
+    public static final String PROP_IDCLIENTE = "idCliente";
+
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        Integer oldIdCliente = this.idCliente;
+        this.idCliente = idCliente;
+        propertyChangeSupport.firePropertyChange(PROP_IDCLIENTE, oldIdCliente, idCliente);
+    }
+
     private Integer idCartao;
 
     public static final String PROP_IDCARTAO = "idCartao";
