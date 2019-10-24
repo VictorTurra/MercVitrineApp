@@ -23,26 +23,49 @@ public class CartaoDAO extends DAO<Cartao>{
     @Override
     public boolean inserir(Cartao element) {
         try{
-            String comando = "INSERT INTO Cartao "
-                    + "(IdCliente, Numero, Validade, Titular, CodVerificador, Tipo ) VALUES "
-                    + "(?, ?, ?, ?, ?, ?);";
             
-            PreparedStatement stmt = conn.prepareStatement(
-                                comando,Statement.RETURN_GENERATED_KEYS);
+            Integer last_id_cartao = 1;
+            String comando = "SELECT max(idCartao) as last_id_cartao FROM cartao WHERE cartao_idPessoa = 1;";
+            
+            try{
+                Statement stmta = conn.createStatement();
+                ResultSet rsa = stmta.executeQuery(comando);
+                
+                
+                if(rsa != null && rsa.next()){
+                    last_id_cartao = rsa.getInt(1);
+                }
+                
+            }catch(SQLException e){
+                System.out.println("Erro ao Capturar ultimo Id de Cartao");
+                e.printStackTrace();
+                return false;
+            }
+            
+            
+            comando = "INSERT INTO cartao "
+                    + "(cartao_idPessoa, idCartao, Numero, validade_mes, validade_ano, Titular, CodVerificador, cartao_idtipo_cartao ) VALUES "
+                    + "(?, ?, ?, ?, ?, ?, ?, ?);";
+            
+            PreparedStatement stmt = conn.prepareStatement(comando);
             
             stmt.setInt(1, 1);
-            stmt.setString(2, element.getNroCartao());
-            stmt.setString(3, element.getValMes() + "/" + element.getValAno());
-            stmt.setString(4, element.getNomeTitular());
-            stmt.setString(5, Integer.toString( element.getCodSeguranca()));
-            stmt.setString(6, element.getTipoCartao());
+            stmt.setInt(2, last_id_cartao + 1 );
+            stmt.setString(3, element.getNroCartao());
+            stmt.setInt(4, element.getValMes());
+            stmt.setInt(5, element.getValAno());
+            stmt.setString(6, element.getNomeTitular());
+            stmt.setString(7, Integer.toString( element.getCodSeguranca()));
+            stmt.setInt(8, 1);
              
             int linhas = stmt.executeUpdate();
             if(linhas==1) {
+                element.setIdCartao(last_id_cartao + 1);
                 return true;
             }
         }catch(SQLException e){
             System.out.println("erro ao inserir Cartão: "+ e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }
