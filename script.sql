@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS Pessoa (
   Sobrenome VARCHAR(45) NOT NULL,
   CPF VARCHAR(45) NOT NULL,
   Telefone VARCHAR(45) NULL,
-  idLogin INT NOT NULL,
   PRIMARY KEY (idPessoa)
 );
 
