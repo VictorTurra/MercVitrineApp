@@ -25,7 +25,7 @@ public class CartaoDAO extends DAO<Cartao>{
         try{
             
             Integer last_id_cartao = 1;
-            String comando = "SELECT max(idCartao) as last_id_cartao FROM cartao WHERE cartao_idPessoa = 1;";
+            String comando = "SELECT max(idCartao) as last_id_cartao FROM cartao WHERE idPessoa = 1;";
             
             try{
                 Statement stmta = conn.createStatement();
@@ -44,7 +44,7 @@ public class CartaoDAO extends DAO<Cartao>{
             
             
             comando = "INSERT INTO cartao "
-                    + "(cartao_idPessoa, idCartao, Numero, validade_mes, validade_ano, Titular, CodVerificador, cartao_idtipo_cartao ) VALUES "
+                    + "( idPessoa, idCartao, Numero, validade_mes, validade_ano, Titular, CodVerificador, idTipoCartao ) VALUES "
                     + "(?, ?, ?, ?, ?, ?, ?, ?);";
             
             PreparedStatement stmt = conn.prepareStatement(comando);
@@ -55,7 +55,7 @@ public class CartaoDAO extends DAO<Cartao>{
             stmt.setInt(4, element.getValMes());
             stmt.setInt(5, element.getValAno());
             stmt.setString(6, element.getNomeTitular());
-            stmt.setString(7, Integer.toString( element.getCodSeguranca()));
+            stmt.setInt(7, element.getCodSeguranca());
             stmt.setInt(8, 1);
              
             int linhas = stmt.executeUpdate();
@@ -74,21 +74,24 @@ public class CartaoDAO extends DAO<Cartao>{
     public boolean alterar(Cartao element) {
         try{
             String comando = "UPDATE Cartao "
-                    + "SET IdCliente = 1, "
+                    + "SET "
+                    + "idPessoa = 1, "
                     + "Numero = ?, "
-                    + "Validade = ?, "
                     + "Titular = ?, "
                     + "CodVerificador = ?, "
-                    + "Tipo = ?,"
-                    + "WHERE idCartao = " + element.getIdCartao().toString() + ";";
+                    + "validade_mes = ?, "
+                    + "validade_ano = ?, "
+                    + "idTipoCartao = 1 "
+                    + "WHERE idCartao = ? AND idPessoa = 1;";
             
             PreparedStatement stmt = conn.prepareStatement(comando);
             
             stmt.setString(1, element.getNroCartao());
-            stmt.setString(2, Integer.toString( element.getValMes()) + "/" + Integer.toString( element.getValAno()) );
-            stmt.setString(3, element.getNomeTitular());
-            stmt.setString(4, Integer.toString( element.getCodSeguranca()));
-            stmt.setString(5, element.getTipoCartao());
+            stmt.setString(2, element.getNomeTitular());
+            stmt.setInt(3, element.getCodSeguranca() );
+            stmt.setInt(4, element.getValMes());
+            stmt.setInt(5, element.getValAno());
+            stmt.setInt(6, element.getIdCartao());
              
             int linhas = stmt.executeUpdate();
             if(linhas==1) {
@@ -105,12 +108,11 @@ public class CartaoDAO extends DAO<Cartao>{
     public boolean excluir(Cartao element) {
         try{
             String comando = "DELETE FROM Cartao "
-                    + "WHERE IdCliente = 1 AND idCartao = ?;";
+                    + "WHERE idPessoa = 1 AND idCartao = ?;";
             
             PreparedStatement stmt = conn.prepareStatement(comando);
             
-            stmt.setInt(1, 1);
-            stmt.setInt(2, element.getIdCartao());
+            stmt.setInt(1, element.getIdCartao());
              
             int linhas = stmt.executeUpdate();
             if(linhas==1) {
@@ -135,15 +137,13 @@ public class CartaoDAO extends DAO<Cartao>{
             while(rs.next()){
                 Cartao c = new Cartao();
                 
-                c.setIdCliente( rs.getInt("IdCliente") );
+                c.setIdCliente( rs.getInt("idPessoa") );
                 c.setIdCartao( rs.getInt("idCartao") );
-                c.setNroCartao(rs.getString("Numero") );
-                String dataVal[] = new String[2];
-                dataVal = rs.getString("Validade").split("/");
-                c.setValMes(Integer.parseInt( dataVal[0] ));
-                c.setValAno(Integer.parseInt( dataVal[1] ));
-                c.setCodSeguranca(Integer.parseInt( rs.getString("CodVerificador")));
-                c.setTipoCartao( rs.getString("Tipo") );
+                c.setNroCartao( rs.getString("Numero") );
+                c.setValMes( rs.getInt("validade_mes") );
+                c.setValAno( rs.getInt("validade_ano") );
+                c.setCodSeguranca( rs.getInt("CodVerificador") );
+                c.setTipoCartao( Integer.toString( rs.getInt("idTipoCartao")) );
                 c.setNomeTitular( rs.getString("Titular") );
                 lstCartao.add(c);
             }

@@ -7,6 +7,7 @@ package Janelas;
 
 import Classes.Cartao;
 import Classes.ConversorIntString;
+import Classes.AreaDeTrabalho;
 import DAO.CartaoDAO;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -34,8 +35,8 @@ public class CadCartao extends javax.swing.JInternalFrame {
      */
     public CadCartao() {
         ConversorIntString conv = new ConversorIntString();
-        lstCartao = new ArrayList<>();
-        lstCartao = ObservableCollections.observableList(lstCartao);
+        CartaoDAO cd = new CartaoDAO();
+        lstCartao = cd.listar();
         
         initComponents();
         
@@ -129,6 +130,23 @@ public class CadCartao extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jLabel1.setText("Numero do Cartão:");
 
@@ -311,30 +329,40 @@ public class CadCartao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int v[] = tbCartao.getSelectedRows();
+        CartaoDAO cd = new CartaoDAO();
         List<Cartao> c = new LinkedList<>();
+        int v[] = tbCartao.getSelectedRows();
         
-        for(int i=0;i<v.length;i++) 
+        for(int i=0;i < v.length;i++) 
         {
             int idxTabela = v[i];
             int idxList = tbCartao.convertRowIndexToModel(idxTabela);
-            c.add(lstCartao.get(idxList));
+            Cartao card = lstCartao.get(idxList);
+            cd.excluir(card);
+            c.add(card);
         }
         
         lstCartao.removeAll(c);
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         CartaoDAO cd = new CartaoDAO();
         
         for(Cartao c : lstCartao){
-            if(c.getIdCartao()==null)
+            if( c.getIdCartao() == null )
                 cd.inserir(c);
             else{
-                //cd.alterar(c);
+                cd.alterar(c);
             }
         }
     }//GEN-LAST:event_btnGravarActionPerformed
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        if(getDesktopPane() instanceof AreaDeTrabalho){
+            ((AreaDeTrabalho)getDesktopPane()).fecharCadastroCartao();
+        }
+    }//GEN-LAST:event_formInternalFrameClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
