@@ -8,7 +8,9 @@ package Janelas;
 import Classes.Cartao;
 import Classes.ConversorIntString;
 import Classes.AreaDeTrabalho;
+import Classes.TipoCartao;
 import DAO.CartaoDAO;
+import DAO.TipoCartaoDAO;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.JTableBinding.ColumnBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -29,6 +32,7 @@ import org.jdesktop.swingbinding.SwingBindings;
 public class CadCartao extends javax.swing.JInternalFrame {
 
     private List<Cartao> lstCartao;
+    private List<TipoCartao> lstTipoCartao;
     
     /**
      * Creates new form CadCartao
@@ -36,11 +40,18 @@ public class CadCartao extends javax.swing.JInternalFrame {
     public CadCartao() {
         ConversorIntString conv = new ConversorIntString();
         CartaoDAO cd = new CartaoDAO();
+        TipoCartaoDAO td = new TipoCartaoDAO();
+        
+        lstTipoCartao = td.listar();
         lstCartao = cd.listar();
         
         initComponents();
         
         BindingGroup bg = new BindingGroup();
+        
+        JComboBoxBinding cbb = SwingBindings.createJComboBoxBinding(
+                AutoBinding.UpdateStrategy.READ_WRITE, lstTipoCartao, txtTpCartao );
+        bg.addBinding(cbb);
         
         JTableBinding tb = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE,
                 lstCartao, tbCartao);
@@ -193,8 +204,6 @@ public class CadCartao extends javax.swing.JInternalFrame {
         jLabel5.setText("Codigo de Segurança: ");
 
         jLabel6.setText("Tipo Cartão:");
-
-        txtTpCartao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Debito", "Credito" }));
 
         tbCartao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
