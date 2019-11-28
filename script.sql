@@ -11,16 +11,6 @@ CREATE TABLE IF NOT EXISTS Produto (
   CONSTRAINT check_produto CHECK ( QtdEstoque >= 0 AND PrecoUN > 0 )
 );
 
-CREATE TABLE IF NOT EXISTS Item (
-  idItem INT(11) NOT NULL AUTO_INCREMENT,
-  QtdItem INT(11) NOT NULL DEFAULT '1',
-  idProduto INT(11) NOT NULL,
-  PRIMARY KEY ( idItem, idProduto ),
-  CONSTRAINT fk_produto FOREIGN KEY ( idProduto )
-    REFERENCES Produto (idProduto),
-  CONSTRAINT check_item CHECK ( QtdItem > 0 )
-);
-
 CREATE TABLE IF NOT EXISTS Nivel (
   idNivel INT(11) NOT NULL AUTO_INCREMENT,
   Descricao VARCHAR(45) NOT NULL,
@@ -31,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Login (
   idLogin INT NOT NULL AUTO_INCREMENT,
   Email VARCHAR(45) NOT NULL,
   Username VARCHAR(45) NOT NULL,
-  Senha CHAR(60) NOT NULL,
+  Senha CHAR(64) NOT NULL,
   idPessoa INT NOT NULL,
   idNivel INT NOT NULL,
   PRIMARY KEY (idLogin),
@@ -65,15 +55,15 @@ CREATE TABLE IF NOT EXISTS Feedback (
 
 CREATE TABLE IF NOT EXISTS Carrinho (
   idPessoa INT NOT NULL,
-  idItem INT NOT NULL,
+  idProduto INT NOT NULL,
   QtdItem INT NOT NULL DEFAULT 1,
-  PRIMARY KEY (idPessoa, idItem),
+  PRIMARY KEY (idPessoa, idProduto),
   CONSTRAINT fk_idPessoa
     FOREIGN KEY (idPessoa)
     REFERENCES Pessoa(idPessoa),
-  CONSTRAINT fk_produto
-    FOREIGN KEY (idItem)
-    REFERENCES Item(idItem),
+  CONSTRAINT fk_idProduto
+    FOREIGN KEY (idProduto)
+    REFERENCES Produto(idProduto),
   CONSTRAINT check_carrinho CHECK ( QtdItem > 0 )
 );
 
